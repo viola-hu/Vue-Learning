@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue learning</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <h2> {{ product }} are in stock.</h2> -->
+    <ul>
+      <!-- v-for directive : for-loop -->
+      <li v-for="product in products">
+        <!-- this way, each product using anyVariable name gets its own list item -->
+        <!-- {{product.quantity}} {{product.name}} -->
+
+        <!-- what if we want to write in the quantity of jackets or hiking socks -->
+        <input type="number" v-model.number="product.quantity">
+          {{product.name}}
+        <!-- for items that have quantity zero, set if statement to render diff text,
+        !!!the span text should only appear if our item quantity equals 0 -->
+        <!-- v-if directive : if statement -->
+        <span v-if="product.quantity === 0">
+          - OUT OF STOCK
+        </span>
+
+        <!-- add some interactivities, through the use of a button, create an Add button for each product, when a click occurs, we'll increment the quantity by one!
+        -->
+        <button @click="product.quantity += 1">
+          Add
+        </button>
+      </li>
+    </ul>
+
+    <!-- To print out the total number of products -->
+    <!-- To make this work, create a computed property called 'totalProducts', which returns the total quantity of our products -->
+    <h2>Total Inventory: {{totalProducts}}</h2>
+  </div>
+
+
+
+  <!-- include Vue library -->
+  <script src='https://unpkg.com/vue'></script>
+  <script>
+    // create a vue instance
+    const whatever = new Vue({
+      // plug into root element
+      el: '#app',
+      // move data inside an object
+      data: {
+        // products: [
+        //   'Boots',
+        //   'Jackets',
+        //   'Hiking Socks'
+        // ]
+        products: []
+      },
+      computed: {
+        totalProducts() {
+          return this.products.reduce((acc,curProduct) => {
+            return acc + curProduct.quantity;
+          } , 0)
+        }
+      },
+      // fetch data from actual API which could be coming from a database somewhere
+      created () {
+        fetch('https://api.myjson.com/bins/74l63')
+        // when use fetch, need to convert the response to json form first
+        .then(response => response.json())
+        // when an app is created, fetch the json formated products info from this API and update them in our data
+        .then(json => {
+          this.products = json.products
+        })
+      }
+    })
+    var product = 'Boots'
+  </script>
+</body>
+</html>
+
+
+<!-- NOTE:
+1,
+created() : since the processing of the options is finished you have access to reactive data properties and change them if you want. At this stage DOM has not been mounted or added yet. So you cannot do any DOM manipulation here
+
+mounted(): called after the DOM has been mounted or rendered. Here you have access to the DOM elements and DOM manipulation can be performed for example get the innerHTML:
+
+console.log(element.innerHTML)
+So your questions:
+1, Is there any case where created would be used over mounted?
+Created is generally used for fetching data from backend API and setting it to data properties as wostex commented . But in SSR mounted() hook is not present you need to perform tasks like fetching data in created hook only.
+
+2, What can I use the created event for, in real-life (real-code) situation?
+For fetching any initial required data to be rendered(like JSON) from external API and assigning it to any reactive data properties.
+
+data:{
+    myJson : null,
+    errors: null
+},
+created(){
+    //pseudo code
+    database.get().then((res) => {
+        this.myJson = res.data;
+    }).catch((err) => {
+        this.errors = err;
+    });
+}
+
+2,
+In-template expressions are very convenient, but they are meant for simple operations. Putting too much logic in your templates can make them bloated and hard to maintain. For example:
+
+<div id="example">
+  {{ message.split('').reverse().join('') }}
+</div>
+At this point, the template is no longer simple and declarative. You have to look at it for a second before realizing that it displays message in reverse. The problem is made worse when you want to include the reversed message in your template more than once.
+
+That’s why for any complex logic, you should use a computed property.
+
+Example:
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+
+
+3, Event handling
+We can use the v-on directive to listen to DOM events and run some JavaScript when they’re triggered.
+
+For example:
+<div id="example-1">
+  <button v-on:click="counter += 1">Add 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
+</div>
+
+var example1 = new Vue({
+  el: '#example-1',
+  data: {
+    counter: 0
+  }
+})
+
+!!!
+'v-on:click' === '@click'
+There is no difference between the two, one is just a shorthand for the second.
+
+#####
+
+The logic for many event handlers will be more complex though, so keeping your JavaScript in the value of the v-on attribute isn’t feasible. That’s why v-on can also accept the name of a method you’d like to call.
+
+For example:
+<div id="example-2">
+  ### `greet` is the name of a method defined below ###
+  <button v-on:click="greet">Greet</button>
+</div>
+
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    name: 'Vue.js'
+  },
+  // define methods under the `methods` object
+  methods: {
+    greet: function (event) {
+      // `this` inside methods points to the Vue instance
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      if (event) {
+        alert(event.target.tagName)
+      }
+    }
+  }
+})
+
+// you can invoke methods in JavaScript too
+example2.greet() // => 'Hello Vue.js!'
+
+
+ -->

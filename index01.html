@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Learning</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1> Product Name </h1>
+    <h2> {{product}} </h2>
+    <p> <span style="fontWeight:600"> Description:</span> {{description}}</p>
+  </div>
+
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+<div id='app'>
+  <!-- {{ }} interpolation -->
+  <h2>X are in stock.</h2>
+</div>
+
+<!-- include vue library -->
+<!-- <script src='https://unpkg.com/vue'></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<scirpt>
+  <!-- create a vue instance, plug into root element with ID of app -->
+  const app = new Vue({
+    <!-- el stands for element -->
+    el: '#app',
+    <!-- move data of the vue instance inside an object -->
+    data: {
+      product: 'Boots'
+    }
+  });
+</scirpt>
