@@ -47,6 +47,50 @@
     <h3>Multiple-line message is:</h3>
     <p style="white-space: pre-line">{{ multiMessageReverse }}</p>
     <textarea v-model="multiMessage" placeholder="pls add multiMessage"></textarea>
+    <br>
+
+    <div id='example-1'>
+      <h2>From Tutorial</h2>
+      <!-- 使用 v-model directive 进行双向绑定，双向绑定对应的data property是 ‘message1’，所以需要在Vue instance的 data object 里注册 message1 的属性，注册为默认值 empty string '' -->
+      <input type="text" v-model='message1' placeholder="edit me">
+      <p>Message is : {{ message1 }}</p>
+      <br />
+
+      <textarea v-model='message2' placeholder="add multiple lines"></textarea>
+      <p style="white-space: pre-line"> {{message2}} </p>
+      <br />
+
+      <!-- checkbox : multiple selection -->
+      <div style="margin-top: 20px">
+        <input type="checkbox" id="jack" value="stored data value - jack" v-model="checkedName">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="stored data value - john" v-model="checkedName">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="stored data value - mike" v-model="checkedName">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{checkedName}}</span>
+      </div>
+
+      <!-- radio : single selection -->
+      <div style="margin-top: 20px">
+        <input type="radio" id="one" value="stored data value 1" v-model="chosen">
+        <label for="one"> One </label>
+        <br>
+        <input type="radio" id="two" value="stored data value 2" v-model="chosen">
+        <label for="two"> Two </label>
+        <br>
+        <input type="radio" id="three" value="stored data value 3" v-model="chosen">
+        <label for="three"> Three </label>
+        <br>
+        <span>Chosen: {{chosen}}</span>
+      </div>
+      <br>
+
+      <!-- create a submit button, and add click event handler to submit data -->
+      <!-- here inside the click event handler, 'submit' is a method name defined inside Vue instance, as v-on event handler can also accept the name of a method you’d like to call.-->
+      <button @click="submit"> Submit </button>
+    </div>
   </div>
 
 
@@ -68,6 +112,15 @@
         products: [],
         message: '',
         multiMessage: '',
+        // 设置表单element的默认值，
+        // 通过改变 Vue instance的 data object property 的 initial value
+        // 当表单element的值发生变化时，在data object 的对应property 内，都可以收集到这些表单element对应的当前值
+        message1: 'test',
+        message2: 'hello',
+        // since checkbox is multiple selection, thus we use array []
+        checkedName: ['stored data value - jack'],
+        // while radio is single selection
+        chosen: 'stored data value 1',
       },
       computed: {
         totalProducts() {
@@ -78,6 +131,22 @@
         multiMessageReverse() {
           return this.multiMessage.split('').reverse().join('')
         },
+      },
+      methods: {
+        submit() {
+          // 绑定该 method 与 button 的 click event handler之后，可以通过每一个data object 里property的值来获取每一个表单element的当前值，which is actually stored inside data object
+          console.log(`submitted: ${this.message1}`);
+
+          // we can declare a new object variable to collect all the data properties, via which we can submit all the info of the form elements
+          const submitObj = {
+            msg1: this.message1,
+            msg2: this.message2,
+            checkedName: this.checkedName,
+            chosen: this.chosen
+          }
+
+          console.log('4x Values', submitObj);
+        }
       },
       // fetch data from actual API which could be coming from a database somewhere
       created () {
@@ -224,4 +293,24 @@ inherit	   规定应该从父元素继承 white-space 属性的值。
 e.g.
 [Vue warn]: The computed property "multiMessage" is already defined in data.
 
+
+6, 你可以用 v-model 指令在表单 <input>、<textarea> 及 <select> 元素上创建双向数据绑定(two-way data bindings)。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但 v-model 本质上不过是语法糖（syntax sugar for updating data on user input events）。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。
+
+*** 双向数据绑定，即，
+1）通过JS改变Vue instance data的值，会即时体现在DOM page上，
+2）通过用户在DOM page上直接的input，改变存储在Vue instance data里的对应property的值。
+=>
+v-model 会忽略所有表单元素的 value、checked、selected 特性的初始值而总是将 Vue 实例的数据作为数据来源。所以，你应该通过 JavaScript 在组件的 data 选项中声明初始值（define as data property in Vue instance，而非直接用该 html tag 的 attribute 来设定初始值！）
+
+v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
+text 和 textarea 元素, 使用 value 属性和 input 事件；
+checkbox 和 radio, 使用 checked 属性和 change 事件；
+select 字段将 value 作为 prop 并将 change 作为事件。
+
+=> v-model.number
+If you want user input to be automatically typecast as a number, you can add the number modifier to your v-model managed inputs:
+
+<input v-model.number="age" type="number">
+
+This is often useful, because even with type="number", the value of HTML input elements always returns a string. If the value cannot be parsed with parseFloat(), then the original value is returned.
  -->
