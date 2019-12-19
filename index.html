@@ -17,6 +17,7 @@
         <!-- {{product.quantity}} {{product.name}} -->
 
         <!-- what if we want to write in the quantity of jackets or hiking socks -->
+        <!-- v-model directive -->
         <input type="number" v-model.number="product.quantity">
           {{product.name}}
         <!-- for items that have quantity zero, set if statement to render diff text,
@@ -37,6 +38,15 @@
     <!-- To print out the total number of products -->
     <!-- To make this work, create a computed property called 'totalProducts', which returns the total quantity of our products -->
     <h2>Total Inventory: {{totalProducts}}</h2>
+
+    <h3>Test</h3>
+    <input type="text" v-model="message" placeholder="pls edit">
+    <p>Message is: {{ message }}</p>
+
+
+    <h3>Multiple-line message is:</h3>
+    <p style="white-space: pre-line">{{ multiMessageReverse }}</p>
+    <textarea v-model="multiMessage" placeholder="pls add multiMessage"></textarea>
   </div>
 
 
@@ -55,19 +65,24 @@
         //   'Jackets',
         //   'Hiking Socks'
         // ]
-        products: []
+        products: [],
+        message: '',
+        multiMessage: '',
       },
       computed: {
         totalProducts() {
           return this.products.reduce((acc,curProduct) => {
             return acc + curProduct.quantity;
           } , 0)
-        }
+        },
+        multiMessageReverse() {
+          return this.multiMessage.split('').reverse().join('')
+        },
       },
       // fetch data from actual API which could be coming from a database somewhere
       created () {
         fetch('https://api.myjson.com/bins/74l63')
-        // when use fetch, need to convert the response to json form first
+        // when use fetch, need to convert the response to json format first
         .then(response => response.json())
         // when an app is created, fetch the json formated products info from this API and update them in our data
         .then(json => {
@@ -75,7 +90,11 @@
         })
       }
     })
+
     var product = 'Boots'
+
+    console.log('whatever.multiMessage', whatever.multiMessage )
+    console.log('whatever.multiMessageReverse', whatever.multiMessageReverse )
   </script>
 </body>
 </html>
@@ -190,5 +209,19 @@ var example2 = new Vue({
 // you can invoke methods in JavaScript too
 example2.greet() // => 'Hello Vue.js!'
 
+
+4, white-space 属性设置如何处理元素内的空白。
+值	        描述
+normal	   默认。空白会被浏览器忽略。
+pre	       空白会被浏览器保留。其行为方式类似 HTML 中的 <pre> 标签。
+nowrap	   忽略空白，且文本不会换行，文本会在同一行上继续，直到遇到 <br> 标签为止。
+pre-wrap	 保留空白符序列, 且正常地进行换行。
+pre-line	 合并空白符序列，但是保留换行符，正常进行换行。
+inherit	   规定应该从父元素继承 white-space 属性的值。
+
+
+5, data 和 computed 不能重复 property 名字！若重复，优先 data 的定义。
+e.g.
+[Vue warn]: The computed property "multiMessage" is already defined in data.
 
  -->
