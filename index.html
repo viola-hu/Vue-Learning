@@ -17,7 +17,7 @@
         <!-- {{product.quantity}} {{product.name}} -->
 
         <!-- what if we want to write in the quantity of jackets or hiking socks -->
-        <!-- v-model directive -->
+        <!-- two-way bind the input element to product quantity field with v-model directive, using '.number' to specify that it's always a number / convert the user input from its default 'string' to a 'number' -->
         <input type="number" v-model.number="product.quantity">
           {{product.name}}
         <!-- for items that have quantity zero, set if statement to render diff text,
@@ -170,6 +170,10 @@
 
 
 <!-- NOTE:
+
+VUE is reactive, meaning that when our data changes, Vue takes care of updating all the places we're using it in our web page. This works with any kind of data.
+
+
 1,
 created() : since the processing of the options is finished you have access to reactive data properties and change them if you want. At this stage DOM has not been mounted or added yet. So you cannot do any DOM manipulation here
 
@@ -302,7 +306,7 @@ e.g.
 =>
 v-model 会忽略所有表单元素的 value、checked、selected 特性的初始值而总是将 Vue 实例的数据作为数据来源。所以，你应该通过 JavaScript 在组件的 data 选项中声明初始值（define as data property in Vue instance，而非直接用该 html tag 的 attribute 来设定初始值！）
 
-v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
+*** v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：
 text 和 textarea 元素, 使用 value 属性和 input 事件；
 checkbox 和 radio, 使用 checked 属性和 change 事件；
 select 字段将 value 作为 prop 并将 change 作为事件。
@@ -313,4 +317,13 @@ If you want user input to be automatically typecast as a number, you can add the
 <input v-model.number="age" type="number">
 
 This is often useful, because even with type="number", the value of HTML input elements always returns a string. If the value cannot be parsed with parseFloat(), then the original value is returned.
+
+
+7, $vue init webpack my-project
+=> start a real projects using vue
+
+
+8, Single File Vue Components
+e.g. product-list.Vue
+=> which contains its own HTML, JS, scoped CSS / SCSS
  -->
