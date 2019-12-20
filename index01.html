@@ -22,6 +22,15 @@
 
       <div class="product-info">
         <h1> {{product}}</h1>
+
+        <!-- 2, conditionally render one element if our product is in stock, and another element if our product is out of stock -->
+        <!-- we want one of the below elements to show up at a time based off one new data - whether inStock is true or false -->
+        <!-- vue conditional directives : v-if / v-else-if / v-else  -->
+        <p v-if="inStock">In Stock</p>
+        <p v-else>Out of Stock</p>
+        <p v-show="showState">Show it or not</p>
+
+
         <h2>I love my {{product}}! They're {{description}} :)</h2>
         <p>
           More socks <a :href="sockLink" target="_blank">here</a>!
@@ -57,4 +66,9 @@ v-bind:class="isActive"   => :class="isActive"
 v-bind:style="isStyled"   => :style="isStyled"
 v-bind:disabled="isDisabled"  => :disabled="isDisabled"
 v-bind:src="image"        => :src="image"
+
+
+2, display:none VS visibility:hidden
+display:none => means that the tag in question will not appear on the page at all. There will be no space allocated for it between the other tags. (although you can still interact with it through the dom).
+visibility:hidden => means that unlike display:none , the tag is not visible, but space is allocated for it on the page. The tag is rendered, it just isn't seen on the page.
 -->
