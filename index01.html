@@ -28,6 +28,10 @@
         <!-- vue conditional directives : v-if / v-else-if / v-else  -->
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
+
+        <!-- 3, v-show directive : when the app cause an element to display or not to display very frequently, v-show is more efficient -->
+        <!-- instead of inserting and removing an element over and over again, v-show only toggles the visibility of an element off and on -->
+        <!-- when v-shows is not showing an elemenet, its style is display:none, which is a more performant option than adding and removing the elemenet from DOM entirely  -->
         <p v-show="showState">Show it or not</p>
 
 

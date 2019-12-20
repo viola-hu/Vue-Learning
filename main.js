@@ -15,7 +15,7 @@ const app = new Vue({
     description: 'warm and fluffy',
     image: './assets/socks-green.jpg',
     sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
-    inStock: true,
+    inStock: 0,
     showState: true,
   }
 
