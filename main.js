@@ -1,7 +1,7 @@
-// 1, new Vue({ OPTIONS }) creates a new vue instance, which is the root of a Vue application
+// 1, new Vue({ OPTIONS }) creates a new vue instance, which is the root of a Vue application / heart of the application!
 // 2, it's created by passing an 'options object' - {options} into it, which has a variety of optional properties which are used to store data and perform actions.
 // 3, In order to form a relationship between the Vue instance and part of the DOM, we use the property 'el'. e.g. here we specify to plug the instance into <div id="app">
-// => now this div and its contents within it is hooked up to our instance.
+// => now this div and its CONTENTS within it is hooked up to our instance.
 const app = new Vue({
   el: '#app',
 
@@ -12,8 +12,10 @@ const app = new Vue({
     // {{ firstName + ' ' + lastName }}
     // {{ clicked ? true : false }}
     product: 'Socks',
+    description: 'warm and fluffy',
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
+  // As Vue is reactive!!! meaning: the instance's data is linked to every place that data is being referenced. => Anywhere that relies on our instance's data will update when that data changes.
 
 });
