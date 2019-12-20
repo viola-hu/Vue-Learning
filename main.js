@@ -13,6 +13,7 @@ const app = new Vue({
     // {{ clicked ? true : false }}
     product: 'Socks',
     description: 'warm and fluffy',
+    image: './assets/socks-green.jpg',
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.

@@ -4,15 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Product App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="nav-bar"></div>
+
   <div id="app">
     <div class="product">
-      <h1> {{product}}</h1>
-      <h2>I love my {{product}}! They're {{description}} :)</h2>
+
+      <div class="product-image">
+        <!-- 1, v-bind directive : create a bond between the data and the attribute that we want the data to be bound to, NO NEED {{}} => expression in the quotes "" !!!-->
+        <!-- here image refers to the vue instance data image! -->
+        <img v-bind:src="image" alt="product image">
+      </div>
+
+      <div class="product-info">
+        <h1> {{product}}</h1>
+        <h2>I love my {{product}}! They're {{description}} :)</h2>
+      </div>
+
     </div>
 
   </div>
@@ -24,3 +36,22 @@
 
 </body>
 </html>
+
+
+<!-- NOTE:
+1, v-bind
+: Dynamically binds an attribute to an expression
+e.g.
+<img v-bind:src="expression">
+=> bind image attribute: src, with expression: image in the quotes ""!!!
+
+*** shorthand:
+e.g
+v-bind:alt="description"  => :alt="description"
+v-bind:href="url"         => :href="url"
+v-bind:title="toolTip"    => :title="toolTip"
+v-bind:class="isActive"   => :class="isActive"
+v-bind:style="isStyled"   => :style="isStyled"
+v-bind:disabled="isDisabled"  => :disabled="isDisabled"
+v-bind:src="image"        => :src="image"
+-->
