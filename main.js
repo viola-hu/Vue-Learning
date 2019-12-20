@@ -14,6 +14,7 @@ const app = new Vue({
     product: 'Socks',
     description: 'warm and fluffy',
     image: './assets/socks-green.jpg',
+    sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
