@@ -16,7 +16,7 @@
 
       <div class="product-image">
         <!-- 1, v-bind directive : create a bond between the data and the attribute that we want the data to be bound to, NO NEED {{}} => expression in the quotes "" !!!-->
-        <!-- here image refers to the vue instance data image! -->
+        <!-- here image refers to the vue instance data property image! -->
         <img v-bind:src="image" alt="product image">
       </div>
 
@@ -24,18 +24,34 @@
         <h1> {{product}}</h1>
 
         <!-- 2, conditionally render one element if our product is in stock, and another element if our product is out of stock -->
-        <!-- we want one of the below elements to show up at a time based off one new data - whether inStock is true or false -->
+        <!-- we want one of the below elements to show up at a time based off on one new data - whether inStock is true or false -->
         <!-- vue conditional directives : v-if / v-else-if / v-else  -->
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
 
-        <!-- 3, v-show directive : when the app cause an element to display or not to display very frequently, v-show is more efficient -->
-        <!-- instead of inserting and removing an element over and over again, v-show only toggles the visibility of an element off and on -->
-        <!-- when v-shows is not showing an elemenet, its style is display:none, which is a more performant option than adding and removing the elemenet from DOM entirely  -->
+        <!-- 2nd example, conditional rendering can be more complex by chaining the vue conditional directives together-->
+        <p v-if="inventory > 10"> In Stock ({{ inventory }})</p>
+        <p v-else-if="inventory <= 10 && inventory > 0"> Almost sold out ({{inventory}}) </p>
+        <p v-else> Sold Out (0 in stock)</p>
+        <!-- *** v-if will actually add / remove the element from DOM!!! -->
+
+        <!-- 3, v-show directive : when the app cause an element to display or not to display very frequently, v-show is more efficient than v-if-->
+        <!-- *** instead of inserting and removing an element over and over again, v-show only toggles the visibility of an element off and on -->
+        <!-- when v-show evaluates to false,
+        0）the element will be hidden
+        1) the element still exists in the DOM,
+        2) there's just CSS property of 'display:none' added to it,
+        3) will affect the layout to take away the space for the element on the page - shrink!
+        => which is a more performant option than adding and removing the elemenet from DOM entirely compared to v-if -->
         <p v-show="showState">Show it or not</p>
 
 
-        <h2>I love my {{product}}! They're {{description}} :)</h2>
+        <h2 v-if="onSale">***On SALE***!!!</h2>
+        <h2 v-else>***No sale***</h2>
+
+
+
+        <p>I love my {{product}}! They're {{description}} :)</p>
         <p>
           More socks <a :href="sockLink" target="_blank">here</a>!
         </p>
@@ -73,6 +89,7 @@ v-bind:src="image"        => :src="image"
 
 
 2, display:none VS visibility:hidden
-display:none => means that the tag in question will not appear on the page at all. There will be no space allocated for it between the other tags. (although you can still interact with it through the dom).
-visibility:hidden => means that unlike display:none , the tag is not visible, but space is allocated for it on the page. The tag is rendered, it just isn't seen on the page.
+display:none => means that the tag in question will not appear on the page at all. There will be no space allocated for it between the other tags. (although you can still interact with it through the dom, as it still exists in DOM).
+
+visibility:hidden => means that unlike display:none, the tag is not visible, but space is still allocated for it on the page. The tag is rendered, it just isn't seen on the page. （占着茅坑不拉屎）
 -->

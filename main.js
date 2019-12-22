@@ -15,8 +15,10 @@ const app = new Vue({
     description: 'warm and fluffy',
     image: './assets/socks-green.jpg',
     sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
-    inStock: 0,
+    inStock: true,
+    inventory: 100,
     showState: true,
+    onSale: true,
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
