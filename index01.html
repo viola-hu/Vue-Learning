@@ -66,12 +66,23 @@
         <!-- when the collection that we want to render into a list is more complex -->
         <!-- *** when rendering lists like this, it's highly recommended to use a 'key' attribute, so that Vue can keep track of each Node's identity. -->
         <!-- here, since 'key' attribute will bind with data 'variantId', so v-bind directive shorthand -->
-        <div v-for="variant in variants" :key="variant.variantId">
-          <p @mouseover="updateProduct(variant.variantImage)"> Color: {{variant.variantColor}}</p>
+        <div v-for="variant in variants"
+             :key="variant.variantId"
+             class="color-box"
+             :style="{ backgroundColor: variant.variantColor }"
+             @mouseover="updateProduct(variant.variantImage)">
+             <!-- 6, style binding -->
+             <!-- 'color-box' class works for both variants, so add it directly -->
+             <!-- while 'backgroundColor' style depends on the variantColor of each variant object, so we specify it separately in style binding to each variant -->
+             
+             <!-- *** as in the style's expression within quotes " " it's an object, so we use camelCase for CSS property name
+             e.g. 'backgroundColor'(instead of 'background-color')
+             Alternatively, you can also use kebab case as long as you put it in quotes ''
+             e.g. { backgroundColor: data}  === { 'background-color': data}
+           -->
         </div>
 
 
-        <!-- 6, style binding -->
 
 
         <!-- 5, v-on: directive, listen for an event you specify after v-on:-->
