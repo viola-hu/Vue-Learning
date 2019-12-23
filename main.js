@@ -37,13 +37,22 @@ const app = new Vue({
   },
   // Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
-    addToCart: function(){
+    // addToCart: function(){
+    // *** instead of anonymous function, using ES6 shorthand like below, but not all browsers may support this feature!!!
+    addToCart() {
       // no need to return a value, but just action on a data property - cart
       // 'this' refers to this vue instance data - cart
       this.cart++;
     },
-    changeImage: function(img) {
+    // updateProduct: function(img) {
+    updateProduct(img) {
       this.image = img;
+    },
+    removeFromCart() {
+      this.cart--;
+      if(this.cart < 0) {
+        this.cart = 0;
+      }
     }
   }
 
