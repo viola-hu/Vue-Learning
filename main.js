@@ -23,19 +23,27 @@ const app = new Vue({
     variants: [
       {
         variantId: 2234,
-        variantColor: "green"
+        variantColor: "green",
+        variantImage: "./assets/socks-green.jpg"
       },
       {
         variantId: 2235,
-        variantColor: "blue"
+        variantColor: "blue",
+        variantImage: "./assets/socks-blue.jpg"
       }
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     cart: 0,
   },
+  // Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
     addToCart: function(){
-      return this.cart++;
+      // no need to return a value, but just action on a data property - cart
+      // 'this' refers to this vue instance data - cart
+      this.cart++;
+    },
+    changeImage: function(img) {
+      this.image = img;
     }
   }
 

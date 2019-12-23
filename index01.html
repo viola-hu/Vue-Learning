@@ -62,7 +62,7 @@
         <!-- *** when rendering lists like this, it's highly recommended to use a 'key' attribute, so that Vue can keep track of each Node's identity. -->
         <!-- here, since 'key' attribute will bind with data 'variantId', so v-bind directive shorthand-->
         <div v-for="variant in variants" :key="variant.variantId">
-          <p> Color: {{variant.variantColor}}</p>
+          <p @mouseover="changeImage(variant.variantImage)"> Color: {{variant.variantColor}}</p>
         </div>
 
         <p>Available sizes:</p>
@@ -71,9 +71,12 @@
         </ul>
 
 
-        <!-- 5, v-on:event directive -->
+        <!-- 5, v-on:event directive, listen for an event you specify after v-on:-->
+        <!-- shorthand, e.g v-on:click => @click -->
+        <!-- inside expression (v-on:click=" expression "), we tell v-on what to do when a click happens-->
         <button v-on:click="cart++"> 1) Add to Cart </button> <br>
-        <!-- here,  "cart++" - the expression is simple, but as it gets more complex, we'll want to be able to trigger METHODS from within these expressions-->
+        <!-- here,  "cart++" - the expression is simple, but as our app gets more complex, we'll want to be able to trigger METHODS from within these expressions-->
+        <!-- below, "addToCart" is a method defined in vue instance methods object-->
         <button v-on:click="addToCart"> 2) Add to Cart </button>
 
         <div class="cart">
