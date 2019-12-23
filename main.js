@@ -31,6 +31,12 @@ const app = new Vue({
       }
     ],
     sizes: ['S', 'M', 'L', 'XL'],
+    cart: 0,
+  },
+  methods: {
+    addToCart: function(){
+      return this.cart++;
+    }
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
