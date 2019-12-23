@@ -71,16 +71,23 @@
              class="color-box"
              :style="{ backgroundColor: variant.variantColor }"
              @mouseover="updateProduct(variant.variantImage)">
-             <!-- 6, style binding -->
-             <!-- 'color-box' class works for both variants, so add it directly -->
-             <!-- while 'backgroundColor' style depends on the variantColor of each variant object, so we specify it separately in style binding to each variant -->
-             
-             <!-- *** as in the style's expression within quotes " " it's an object, so we use camelCase for CSS property name
-             e.g. 'backgroundColor'(instead of 'background-color')
-             Alternatively, you can also use kebab case as long as you put it in quotes ''
-             e.g. { backgroundColor: data}  === { 'background-color': data}
-           -->
-        </div>
+         </div>
+         <!-- 6, style binding -->
+         <!-- 'color-box' class works for both variants, so add it directly -->
+         <!-- while 'backgroundColor' style depends on the variantColor of each variant object, so we specify it separately in style binding to each variant -->
+
+         <!-- *** as in the style's expression within quotes " " it's an object, so we use camelCase for CSS property name
+         e.g. 'backgroundColor'(instead of 'background-color')
+         Alternatively, you can also use kebab case as long as you put it in quotes ''
+         e.g. { backgroundColor: data}  === { 'background-color': data} -->
+
+         <!-- *** binding to a style object -->
+         <!-- instead of specifying individual CSS properties that is bound to data, it's usually cleaner and more readable to just bind to a style object-->
+         <span :style="styleObject"> Style Bindings to Objects</span> <br>
+         <!-- if you were to have multiple style objects in data, you can bind the element to each of them using an array. -->
+         <span :style="[styleObject, styleObject2]"> Binding to multiple style objects</span>
+
+
 
 
 

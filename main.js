@@ -34,6 +34,12 @@ const app = new Vue({
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     cart: 0,
+    styleObject: {
+      color: 'red',
+    },
+    styleObject2: {
+      background: 'yellow'
+    }
   },
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
