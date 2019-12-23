@@ -35,7 +35,7 @@ const app = new Vue({
     sizes: ['S', 'M', 'L', 'XL'],
     cart: 0,
   },
-  // Just like our instance can have a property for its data, it can also have a property for methods
+  // 7, Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
     // addToCart: function(){
     // *** instead of anonymous function, using ES6 shorthand like below, but not all browsers may support this feature!!!
