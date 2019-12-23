@@ -49,6 +49,27 @@
         <h2 v-if="onSale">***On SALE***!!!</h2>
         <h2 v-else>***No sale***</h2>
 
+        <br>
+        <h2>Details:</h2>
+        <ul>
+          <!-- 4, v-for directive : for-loop through array -->
+          <!-- "details" refers to Vue instance data property 'details' - array -->
+          <!-- "detail" is like a variable name for each item that we iterate on as we loop through the array/collection of details => thus, this variable name can be whatever including "detail"-->
+          <li v-for="detail in details"> {{detail}} </li>
+        </ul>
+
+        <!-- when the collection that we want to render into a list is more complex -->
+        <!-- *** when rendering lists like this, it's highly recommended to use a 'key' attribute, so that Vue can keep track of each Node's identity. -->
+        <!-- here, since 'key' attribute will bind with data 'variantId', so v-bind directive shorthand-->
+        <div v-for="variant in variants" :key="variant.variantId">
+          <p> Color: {{variant.variantColor}}</p>
+        </div>
+
+        <p>Available sizes:</p>
+        <ul>
+          <li v-for="size in sizes" :key="size"> {{size}} </li>
+        </ul>
+
 
 
         <p>I love my {{product}}! They're {{description}} :)</p>
@@ -86,6 +107,7 @@ v-bind:class="isActive"   => :class="isActive"
 v-bind:style="isStyled"   => :style="isStyled"
 v-bind:disabled="isDisabled"  => :disabled="isDisabled"
 v-bind:src="image"        => :src="image"
+v-bind:key="variantId"    => :key="variantId"
 
 
 2, display:none VS visibility:hidden

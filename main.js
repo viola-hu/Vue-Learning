@@ -19,6 +19,18 @@ const app = new Vue({
     inventory: 100,
     showState: true,
     onSale: true,
+    details: ["80% cotton", "20% polyster", "Gender-neutral"],
+    variants: [
+      {
+        variantId: 2234,
+        variantColor: "green"
+      },
+      {
+        variantId: 2235,
+        variantColor: "blue"
+      }
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
   }
 
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
