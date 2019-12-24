@@ -12,6 +12,7 @@ const app = new Vue({
     // {{ firstName + ' ' + lastName }}
     // {{ clicked ? true : false }}
     product: 'Socks',
+    brand: 'Vue Mastery',
     description: 'warm and fluffy',
     image: './assets/socks-green.jpg',
     sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
@@ -40,8 +41,17 @@ const app = new Vue({
     },
     styleObject2: {
       background: 'yellow'
+    },
+  },
+  // 8, computed data
+  computed: {
+    productWithBrand(){
+      return this.brand + ' ' + this.product;
     }
   },
+
+
+
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
     // addToCart: function(){
