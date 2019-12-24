@@ -44,7 +44,17 @@ const app = new Vue({
     },
   },
   // 8, computed data
-  // Q: what's the difference between computed and methods?
+  // Just like data/methods property of our Vue instance, we can add an object of 'computed' properties!
+  // data: more like original/ pure data that you get initially without calculating/computing
+  // methods: more like holding callbacks of event handlers
+  // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value!
+  // *** computer properties are cached!!! => the result is saved until its dependencies change.
+  // => 1) if any dependencies is changed, the computed property will re-run the code and the new return value will be cached! => so it updates the page immediately!
+  // => 2) if no dependencies change, every time the computed property is accessed, code won't re-run but only provide the cached value directly
+  // Q: computed VS methods?
+  // => more efficient to use a computed property, rather than a method, for an expensive operation that you don't wanna re-run the code every time you access it.
+  // as computed property's value is cached, the code won't re-run everytime you access it but only provides the cached value directly, unless any dependency changes and then it reruns the code to cache the new value.
+  // while methods property code will re-run every time one method is triggered like event handler callbacks
   computed: {
     productWithBrand(){
       return this.brand + ' ' + this.product;
