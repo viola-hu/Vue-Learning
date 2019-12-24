@@ -119,14 +119,14 @@
         }
         === <div class="active"></div> -->
 
-        <!-- *** 3) can bind the element to an array of classes
+        <!-- *** 3) can add an array of classes to an element
         e.g.
         <div :class="[activeClass, errorClass]"> ... </div>
         data: {
           activeClass: 'active',
           errorClass: 'text-danger'
         }
-        === <div class="active, text-danger"></div>  -->
+        === <div class="active text-danger"></div>  -->
 
         <!-- *** 4) can even perform some conditional logic with the ternary operator within an array expression
         e.g
@@ -197,4 +197,5 @@ visibility:hidden => means that unlike display:none, the tag is not visible, but
 
 3, <button disable="true/false">
 : disabled -> this boolean attribute prevents the user from interacting with the button.
+-> only make the button not do anything (disabled) when it's clicked, but it doesn't change any appearance.
 -->
