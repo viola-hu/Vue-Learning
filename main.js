@@ -36,6 +36,7 @@ const app = new Vue({
     cart: 0,
     styleObject: {
       color: 'red',
+      fontStyle: 'italic',
     },
     styleObject2: {
       background: 'yellow'

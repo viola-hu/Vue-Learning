@@ -76,16 +76,16 @@
          <!-- 'color-box' class works for both variants, so add it directly -->
          <!-- while 'backgroundColor' style depends on the variantColor of each variant object, so we specify it separately in style binding to each variant -->
 
-         <!-- *** as in the style's expression within quotes " " it's an object, so we use camelCase for CSS property name
+         <!-- *** 1) as in the style's expression within quotes " " it's an object, so we use camelCase for CSS property name
          e.g. 'backgroundColor'(instead of 'background-color')
          Alternatively, you can also use kebab case as long as you put it in quotes ''
          e.g. { backgroundColor: data}  === { 'background-color': data} -->
 
-         <!-- *** binding to a style object -->
-         <!-- instead of specifying individual CSS properties that is bound to data, it's usually cleaner and more readable to just bind to a style object-->
+         <!-- *** 2) binding to a style object -->
+         <!-- instead of specifying CSS properties within an object in style attribute, it's usually cleaner and more readable to just bind to an entire style object predefined in data-->
          <span :style="styleObject"> Style Bindings to Objects</span> <br>
          <!-- if you were to have multiple style objects in data, you can bind the element to each of them using an array. -->
-         <span :style="[styleObject, styleObject2]"> Binding to multiple style objects</span>
+         <span :style="[styleObject, styleObject2]"> Binding to multiple style objects using Array</span>
 
 
 
@@ -98,7 +98,16 @@
         <button v-on:click="cart++"> 1) Add to Cart </button> <br>
         <!-- here,  "cart++" - the expression is simple, but as our app gets more complex, we'll want to be able to trigger METHODS from within these expressions inside quotes " "-->
         <!-- below, "addToCart" is a method defined in vue instance methods object-->
-        <button v-on:click="addToCart"> 2) Add to Cart </button>
+        <button v-on:click="addToCart"
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock }"> 2) Add to Cart </button>
+        <!-- *** bind the 'disabled' attribute to inStock data, so that when product is inStock-true, disabled-false while inStock-false then disabled-true -->
+
+        <!-- 7, class binding -->
+        <!-- On top of disabling the button, bind this .disabledButton CSS class to the button only when/whenever 'inStock' is false => so when inStock is false, .disabledButton class is true - will be added to the button, while if inStock is true, .disabledButton class is false - not to be added to the button element-->
+        <!-- :class="{ className: truthy/falsy}" => the bound data truthy/falsy decides whether the class of className will be added to the element or not!-->
+
+
 
         <button @click="removeFromCart"> 3) Decrement </button>
 
@@ -153,4 +162,8 @@ v-bind:key="variantId"    => :key="variantId"
 display:none => means that the tag in question will not appear on the page at all. There will be no space allocated for it between the other tags. (although you can still interact with it through the dom, as it still exists in DOM).
 
 visibility:hidden => means that unlike display:none, the tag is not visible, but space is still allocated for it on the page. The tag is rendered, it just isn't seen on the page. （占着茅坑不拉屎）
+
+
+3, <button disable="true/false">
+: disabled -> this boolean attribute prevents the user from interacting with the button.
 -->
