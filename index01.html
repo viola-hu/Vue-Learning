@@ -27,7 +27,7 @@
         <!-- we want one of the below elements to show up at a time based off on one new data - whether inStock is true or false -->
         <!-- vue conditional directives : v-if / v-else-if / v-else  -->
         <p v-if="inStock">In Stock</p>
-        <p v-else>Out of Stock</p>
+        <p v-else :class="{ 'out-of-stock': !inStock }">Out of Stock</p>
 
         <!-- 2nd example, conditional rendering can be more complex by chaining the vue conditional directives together-->
         <p v-if="inventory > 10"> In Stock ({{ inventory }})</p>
@@ -105,7 +105,38 @@
 
         <!-- 7, class binding -->
         <!-- On top of disabling the button, bind this .disabledButton CSS class to the button only when/whenever 'inStock' is false => so when inStock is false, .disabledButton class is true - will be added to the button, while if inStock is true, .disabledButton class is false - not to be added to the button element-->
-        <!-- :class="{ className: truthy/falsy}" => the bound data truthy/falsy decides whether the class of className will be added to the element or not!-->
+
+        <!-- *** 1) :class="{ className: data expression}" => the bound data expression (true/false) decides whether the class of className will be added to the element or not!-->
+
+        <!-- *** 2) can also bind an object of classes which is pre-defined in data -->
+        <!-- e.g.
+        <div :class="classObj"> ... </div>
+        data:{
+          classObj: {
+            active: true,      => Only the class that evaluates to true will be added to the element
+            'text-danger': false
+          }
+        }
+        === <div class="active"></div> -->
+
+        <!-- *** 3) can bind the element to an array of classes
+        e.g.
+        <div :class="[activeClass, errorClass]"> ... </div>
+        data: {
+          activeClass: 'active',
+          errorClass: 'text-danger'
+        }
+        === <div class="active, text-danger"></div>  -->
+
+        <!-- *** 4) can even perform some conditional logic with the ternary operator within an array expression
+        e.g
+        <div :class="[isActive ? activeClass : '']"> ... </div>
+        data: {
+          isActive: true,
+          activeClass: 'active'
+        }
+        === <div class="active"></div>
+      -->
 
 
 
