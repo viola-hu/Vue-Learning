@@ -28,6 +28,8 @@
         <!-- vue conditional directives : v-if / v-else-if / v-else  -->
         <p v-if="inStock">In Stock</p>
         <p v-else :class="{ 'out-of-stock': !inStock }">Out of Stock</p>
+        <!-- the below also works as 'Out of Stock' element is added to DOM only when inStock is false -->
+        <!-- <p v-else class="out-of-stock">Out of Stock</p> -->
 
         <!-- 2nd example, conditional rendering can be more complex by chaining the vue conditional directives together-->
         <p v-if="inventory > 10"> In Stock ({{ inventory }})</p>
