@@ -44,6 +44,7 @@ const app = new Vue({
     },
   },
   // 8, computed data
+  // Q: what's the difference between computed and methods?
   computed: {
     productWithBrand(){
       return this.brand + ' ' + this.product;
