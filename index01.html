@@ -69,11 +69,11 @@
         <!-- when the collection that we want to render into a list is more complex -->
         <!-- *** when rendering lists like this, it's highly recommended to use a 'key' attribute, so that Vue can keep track of each Node's identity. -->
         <!-- here, since 'key' attribute will bind with data 'variantId', so v-bind directive shorthand -->
-        <div v-for="variant in variants"
+        <div v-for="(variant, index) in variants"
              :key="variant.variantId"
              class="color-box"
              :style="{ backgroundColor: variant.variantColor }"
-             @mouseover="updateProduct(variant.variantImage)">
+             @mouseover="updateProduct(index)">
          </div>
          <!-- 6, style binding -->
          <!-- 'color-box' class works for both variants, so add it directly -->

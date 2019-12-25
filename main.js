@@ -14,9 +14,10 @@ const app = new Vue({
     product: 'Socks',
     brand: 'Vue Mastery',
     description: 'warm and fluffy',
-    image: './assets/socks-green.jpg',
+    // image: './assets/socks-green.jpg',
+    selectedVariant: 0, // 0 is because we'll be setting this based on the index of variants that we hover on
     sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
-    inStock: true,
+    // inStock: true,
     inventory: 100,
     showState: true,
     onSale: true,
@@ -25,12 +26,14 @@ const app = new Vue({
       {
         variantId: 2234,
         variantColor: "green",
-        variantImage: "./assets/socks-green.jpg"
+        variantImage: "./assets/socks-green.jpg",
+        variantQuantity: 10,
       },
       {
         variantId: 2235,
         variantColor: "blue",
-        variantImage: "./assets/socks-blue.jpg"
+        variantImage: "./assets/socks-blue.jpg",
+        variantQuantity:  0,
       }
     ],
     sizes: ['S', 'M', 'L', 'XL'],
@@ -58,6 +61,12 @@ const app = new Vue({
   computed: {
     productWithBrand() {
       return this.brand + ' ' + this.product;
+    },
+    image( ) {
+      return this.variants[this.selectedVariant].variantImage;
+    },
+    inStock() {
+      return this.variants[this.selectedVariant].variantQuantity; // if 0 - false/ else - true
     }
   },
 
@@ -71,8 +80,10 @@ const app = new Vue({
       this.cart++;
     },
     // updateProduct: function(img) {
-    updateProduct(img) {
-      this.image = img;
+    updateProduct(index) {
+      // this.image = img;
+      this.selectedVariant = index; // update the selectedVariant with the index of whichever variant is currently hovered on.
+      console.log('this.selectedVariant', this.selectedVariant);
     },
     removeFromCart() {
       this.cart--;
