@@ -82,6 +82,7 @@ const app = new Vue({
     // Q:
     // 1, why when refresh page, not showing up, but change to Vue Devtool - show up!
     // 2, why not use methods here?
+    // 3, is this example not a good one?
   },
 
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
