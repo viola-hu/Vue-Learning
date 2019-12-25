@@ -49,19 +49,17 @@ const app = new Vue({
   // methods: more like holding callbacks of event handlers
   // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value!
   // *** computer properties are cached!!! => the result is saved until its dependencies change.
-  // => 1) if any dependencies is changed, the computed property will re-run the code and the new return value will be cached! => so it updates the page immediately!
+  // => 1) if any dependency is changed, the computed property will re-run the code and the new return value will be cached! => it updates the page immediately!
   // => 2) if no dependencies change, every time the computed property is accessed, code won't re-run but only provide the cached value directly
   // Q: computed VS methods?
-  // => more efficient to use a computed property, rather than a method, for an expensive operation that you don't wanna re-run the code every time you access it.
-  // as computed property's value is cached, the code won't re-run everytime you access it but only provides the cached value directly, unless any dependency changes and then it reruns the code to cache the new value.
-  // while methods property code will re-run every time one method is triggered like event handler callbacks
+  // A: more efficient to use a computed property, rather than a method, for an expensive operation that you don't wanna re-run the code every time you access it.
+  // because computed property's return value is cached, the code won't re-run everytime you access it but instead only provides the cached value directly, unless any dependency changes and then it will re-run the code to cache the new value.
+  // while methods property code will re-run every time the method is triggered like event handler callbacks
   computed: {
-    productWithBrand(){
+    productWithBrand() {
       return this.brand + ' ' + this.product;
     }
   },
-
-
 
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
   methods: {
