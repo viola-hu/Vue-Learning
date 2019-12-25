@@ -50,12 +50,12 @@ const app = new Vue({
   },
   // 8, computed data
   // Just like data/methods property of our Vue instance, we can add an object of 'computed' properties!
-  // data: more like original/ pure data that you get initially without calculating/computing
-  // methods: more like holding callbacks of event handlers
-  // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value!
+  // data: original/ pure data that you get initially without calculating/computing，初始值
+  // methods: 基本上用于定义 event handler callbacks
+  // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value! 多用于基于初始化值计算得出的值，该值一般不变。若根据页面 event 而 value 发生变化，则通过 method 来定义 event handler！
+
   // *** computer properties are cached!!! => the result is saved until its dependencies change.
   // e.g. cached in memory like -> productWithBrand = 'Vue Mastery Socks'
-
   // => 1) if any dependency is changed, the computed property will re-run the code and the new return value will be cached! => it also updates the page immediately!
   // => 2) if no dependencies change, every time the computed property is accessed, code won't re-run but only provide the cached value directly
 
@@ -72,17 +72,17 @@ const app = new Vue({
     inStock() {
       return this.variants[this.selectedVariant].variantQuantity; // if 0 - false/ else - true
     },
-    onSaleNotice() {
-      if(this.onSale) alert(`${this.productWithBrand} is ON SALE!`)
-    },
+    // onSaleNotice() {
+    //   if(this.onSale) {
+    //     alert(`${this.productWithBrand} is ON SALE!`)
+    //   }
+    // },
     printOutOnSale() {
-      if(this.onSale) console.log(`${this.productWithBrand} is ON SALE!`)
+      if(this.onSale) {
+        console.log(`${this.productWithBrand} is ON SALE!`);
+        return `${this.productWithBrand} is ON SALE!`;
+      }
     },
-
-    // Q:
-    // 1, why when refresh page, not showing up, but change to Vue Devtool - show up!
-    // 2, why not use methods here?
-    // 3, is this example not a good one?
   },
 
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
