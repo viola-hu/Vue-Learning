@@ -15,7 +15,9 @@ const app = new Vue({
     brand: 'Vue Mastery',
     description: 'warm and fluffy',
     // image: './assets/socks-green.jpg',
-    selectedVariant: 0, // 0 is because we'll be setting this based on the index of variants that we hover on
+    // *** if we want to change more than just the image based on which variant is hovered on,
+    // we need to have a property, as an intermediate（中介）, to refer to the entire variant that's hovered on, so via this property we can access all the information of the variant to reference them in other parts of changes!
+    selectedVariant: 0, // 0 is because we'll be setting this based on the index of variant that we hover on in the variants array.
     sockLink: 'https://www.amazon.com/slp/christmas-socks/3vaomf2m8rkr44y',
     // inStock: true,
     inventory: 100,
@@ -33,7 +35,7 @@ const app = new Vue({
         variantId: 2235,
         variantColor: "blue",
         variantImage: "./assets/socks-blue.jpg",
-        variantQuantity:  0,
+        variantQuantity: 0,
       }
     ],
     sizes: ['S', 'M', 'L', 'XL'],
@@ -52,12 +54,14 @@ const app = new Vue({
   // methods: more like holding callbacks of event handlers
   // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value!
   // *** computer properties are cached!!! => the result is saved until its dependencies change.
-  // => 1) if any dependency is changed, the computed property will re-run the code and the new return value will be cached! => it updates the page immediately!
+  // e.g. cached in memory like -> productWithBrand = 'Vue Mastery Socks'
+
+  // => 1) if any dependency is changed, the computed property will re-run the code and the new return value will be cached! => it also updates the page immediately!
   // => 2) if no dependencies change, every time the computed property is accessed, code won't re-run but only provide the cached value directly
+
   // Q: computed VS methods?
   // A: more efficient to use a computed property, rather than a method, for an expensive operation that you don't wanna re-run the code every time you access it.
-  // because computed property's return value is cached, the code won't re-run everytime you access it but instead only provides the cached value directly, unless any dependency changes and then it will re-run the code to cache the new value.
-  // while methods property code will re-run every time the method is triggered like event handler callbacks
+  // while methods property code will re-run every time they are triggered like event handler callbacks.
   computed: {
     productWithBrand() {
       return this.brand + ' ' + this.product;
@@ -67,7 +71,17 @@ const app = new Vue({
     },
     inStock() {
       return this.variants[this.selectedVariant].variantQuantity; // if 0 - false/ else - true
-    }
+    },
+    onSaleNotice() {
+      if(this.onSale) alert(`${this.productWithBrand} is ON SALE!`)
+    },
+    printOutOnSale() {
+      if(this.onSale) console.log(`${this.productWithBrand} is ON SALE!`)
+    },
+
+    // Q:
+    // 1, why when refresh page, not showing up, but change to Vue Devtool - show up!
+    // 2, why not use methods here?
   },
 
   // 7, Just like our instance can have a property for its data, it can also have a property for methods
@@ -82,7 +96,7 @@ const app = new Vue({
     // updateProduct: function(img) {
     updateProduct(index) {
       // this.image = img;
-      this.selectedVariant = index; // update the selectedVariant with the index of whichever variant is currently hovered on.
+      this.selectedVariant = index; // update the selectedVariant with the index of whichever variant that is currently hovered on.
       console.log('this.selectedVariant', this.selectedVariant);
     },
     removeFromCart() {
