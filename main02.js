@@ -1,18 +1,22 @@
 // level 2
 Vue.component('product', {
+  // in order to receive props, components need to explicitly declare the props that it expects to receive, using the 'props' option
+  // *** when declaring component props, it's recommended to specify requirements with built-in prop validation.
   props: {             // 1) add 'props' option, like 'template', 'data', 'methods', 'computed'
     whateverName: {    // 2) write the name of the prop that the component is expected to receive,
                        // 3) the object is to specify its type and other requirements of the prop.
                        // *** Prop Validation ***
                        // => Components can specify requirements for their props, such as types. If a requirement isn’t met/ validation fails, Vue will warn you in the browser’s JavaScript console. This is especially useful when developing a component that’s intended to be used by others.
       type: Boolean,
-      required: true,  // ??? Q1: required, what will happen if the actual passed down value is false?
+      required: true,  // required, 表示该 prop 值必须存在， specify if the prop is required or not
+      default: true,   // 如果没有 value 从 parent pass down，可以在此设置一个 default value！
     },
     productDetails: {
       type: Object,
       required: true,
     }
   },
+  // *** Component template must contain exactly one root element!!! - wrap a <div> most outside
   template: `
     <div class="product">
 
@@ -62,7 +66,8 @@ Vue.component('product', {
 
     </div>
   `,
-  // !!! Transform the data object into a function that returns this data object.
+  // *** Transform the data object into a function that returns this data object.
+  // so that it returns a brand new data object for each component, referring to different memory spaces storing the object value -> they are all separate individuals!
   data () {
     return {
       product: 'Socks',
