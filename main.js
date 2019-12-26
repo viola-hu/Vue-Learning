@@ -52,7 +52,7 @@ const app = new Vue({
   // Just like data/methods property of our Vue instance, we can add an object of 'computed' properties!
   // data: original/ pure data that you get initially without calculating/computing，初始值
   // methods: 基本上用于定义 event handler callbacks
-  // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value! 多用于基于初始化值计算得出的值，该值一般不变。若根据页面 event 而 value 发生变化，则通过 method 来定义 event handler！
+  // computed: a computed property acts like a calculator, which is fed values, then it computes with those values in order to return a new value! 多用于基于初始值计算得出的值，从而 render 在页面，而该值一般不变。若根据页面 event 而 value 发生变化，则通过 methods 来定义 event handler！
 
   // *** computer properties are cached!!! => the result is saved until its dependencies change.
   // e.g. cached in memory like -> productWithBrand = 'Vue Mastery Socks'
@@ -61,7 +61,7 @@ const app = new Vue({
 
   // Q: computed VS methods?
   // A: more efficient to use a computed property, rather than a method, for an expensive operation that you don't wanna re-run the code every time you access it.
-  // while methods property code will re-run every time they are triggered like event handler callbacks.
+  // while every method code will re-run every time they are triggered like event handler callbacks.
   computed: {
     productWithBrand() {
       return this.brand + ' ' + this.product;
