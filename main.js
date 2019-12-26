@@ -111,4 +111,8 @@ const app = new Vue({
   // 6, if we change Socks to Boots, expression will receive the updated value of product, and h1 will update accordingly.
   // As Vue is reactive!!! meaning: the instance's data is linked to every place that data is being referenced. => Anywhere that relies on our instance's data will update when that data changes.
 
+
+  // 9, Components:
+  
+
 });
