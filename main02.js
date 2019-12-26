@@ -88,35 +88,35 @@ Vue.component('product', {
     }
   },
   methods: {
-      addToCart: function() {
-          this.cart += 1
-      },
-      updateProduct: function(index) {
-          this.selectedVariant = index
-      }
+    addToCart() {
+        this.cart += 1
+    },
+    updateProduct(index) {
+        this.selectedVariant = index
+    }
   },
   computed: {
-      title() {
-          return this.brand + ' ' + this.product
-      },
-      image(){
-          return this.variants[this.selectedVariant].variantImage
-      },
-      inStock(){
-          return this.variants[this.selectedVariant].variantQuantity
-      },
-      sale() {
-        if (this.onSale) {
-          return this.brand + ' ' + this.product + ' are on sale!'
-        }
-          return  this.brand + ' ' + this.product + ' are not on sale'
-      },
-      shipping() {
-        if(this.whateverName){
-          return 'Free';
-        }
-        return 2.99;
-      },
+    title() {
+        return this.brand + ' ' + this.product
+    },
+    image(){
+        return this.variants[this.selectedVariant].variantImage
+    },
+    inStock(){
+        return this.variants[this.selectedVariant].variantQuantity
+    },
+    sale() {
+      if (this.onSale) {
+        return this.brand + ' ' + this.product + ' are on sale!'
+      }
+        return  this.brand + ' ' + this.product + ' are not on sale'
+    },
+    shipping() {
+      if(this.whateverName){
+        return 'Free';
+      }
+      return 2.99;
+    },
   }
 })
 
