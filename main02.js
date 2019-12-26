@@ -1,7 +1,48 @@
+Vue.component('product', {
+  template: `
+    <div class="product">
 
-var app = new Vue({
-  el: '#app',
-  data: {
+      <div class="product-image">
+        <img :src="image" />
+      </div>
+
+      <div class="product-info">
+        <h1>{{ title }}</h1>
+        <p v-if="inStock">In Stock</p>
+        <p v-else>Out of Stock</p>
+        <p>{{ sale }}</p>
+
+        <ul>
+          <li v-for="detail in details">{{ detail }}</li>
+        </ul>
+
+
+          <div class="color-box"
+               v-for="(variant, index) in variants"
+               :key="variant.variantId"
+               :style="{ backgroundColor: variant.variantColor }"
+               @mouseover="updateProduct(index)"
+               >
+          </div>
+
+          <button v-on:click="addToCart"
+            :disabled="!inStock"
+            :class="{ disabledButton: !inStock }"
+            >
+          Add to cart
+          </button>
+
+          <div class="cart">
+            <p>Cart({{ cart }})</p>
+          </div>
+
+        </div>
+
+    </div>
+  `,
+  // !!! Transform the data into a function that returns this data object.
+  data () {
+    return {
       product: 'Socks',
       brand: 'Vue Mastery',
       selectedVariant: 0,
@@ -22,6 +63,7 @@ var app = new Vue({
       ],
       cart: 0,
       onSale: true
+    }
   },
   methods: {
       addToCart: function() {
@@ -48,4 +90,10 @@ var app = new Vue({
           return  this.brand + ' ' + this.product + ' are not on sale'
       }
   }
+})
+
+
+
+var app = new Vue({
+  el: '#app',
 })
