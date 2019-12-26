@@ -1,4 +1,14 @@
 Vue.component('product', {
+  props: {             // add 'props' option, like 'template', 'data', 'methods', 'computed'
+    whateverName: {    // the name of the prop that the component is expected to receive,
+                       // the object is to specify its type and other requirements of the prop.
+                       // *** Prop Validation ***
+                       // => Components can specify requirements for their props, such as types. If a requirement isn’t met, Vue will warn you in the browser’s JavaScript console. This is especially useful when developing a component that’s intended to be used by others.
+                       // When prop validation fails, Vue will produce a console warning (if using the development build).
+      type: Boolean,
+      required: true,  // ??? Q1: required, what will happen if the actual passed down value is false?
+    }
+  },
   template: `
     <div class="product">
 
@@ -40,7 +50,7 @@ Vue.component('product', {
 
     </div>
   `,
-  // !!! Transform the data into a function that returns this data object.
+  // !!! Transform the data object into a function that returns this data object.
   data () {
     return {
       product: 'Socks',
@@ -96,4 +106,9 @@ Vue.component('product', {
 
 var app = new Vue({
   el: '#app',
+  data: {
+    premium: true,  // pass this data into <product> component as a prop, from parent to child element
+                    // *** if premium: 'hi', we received a warning in console as below
+                    // [Vue warn]: Invalid prop: type check failed for prop "whateverName". Expected Boolean, got String.
+  }
 })
