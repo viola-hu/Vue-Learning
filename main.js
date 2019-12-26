@@ -113,6 +113,6 @@ const app = new Vue({
 
 
   // 9, Components:
-  
+  // switch to new files - index02.html + main02.js
 
 });
