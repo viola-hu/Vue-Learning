@@ -188,7 +188,6 @@ Vue.component('product-review', {
       this.name = null;
       this.review = null;
       this.rating = null;
-
     }
   }
 })
