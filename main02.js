@@ -170,3 +170,5 @@ var app = new Vue({
     }
   }
 })
+
+// 10, communicating events
