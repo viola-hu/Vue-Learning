@@ -165,12 +165,30 @@ Vue.component('product-review', {
 
     </form>
 
-  `,  // v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number
+  `,
+  // v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number, instead of a string by default of user inputs!
+  // @submit.prevent, '.prevent' is another modifier that will prevent the default behavior of browser from refreshing page when submiting a form!
   data() {
     return {
       name: null,
       review: null,
       rating: null,
+    }
+  },
+  methods: {
+    onSubmit() {
+      let productReview = {
+        name: this.name,
+        review: this.review,
+        rating: this.rating,
+      }
+      // whenever we submit this form, 尽管页面refresh，但是如果不清理data，还会存留着上一个提交form的内容。
+      // => after retrieving the review info from data and saving into a new variable object,
+      // reset/clear data for the next round of submit!
+      this.name = null;
+      this.review = null;
+      this.rating = null;
+
     }
   }
 })
