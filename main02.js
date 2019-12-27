@@ -53,7 +53,11 @@ Vue.component('product', {
           :disabled="!inStock"
           :class="{ disabledButton: !inStock }"
           >
-        Add to cart
+          Add to cart
+        </button>
+
+        <button @click="removeFromCart">
+          Remove from cart
         </button>
 
         <productDetails :detailslalala=" productDetails "></productDetails>
@@ -93,10 +97,13 @@ Vue.component('product', {
         // instead, we need to let the parent know that the button is clicked by emitting an event!
         // *** this.$emit(' name-of-the-event ', other arguments)
         this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
-        // bubble up data of product ID as the second argument to parent component
+        // bubble up data of product ID as the second parameter to parent component
     },
     updateProduct(index) {
         this.selectedVariant = index
+    },
+    removeFromCart(){
+        this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
     }
   },
   computed: {
@@ -172,6 +179,13 @@ var app = new Vue({
   methods: {
     updateCart(id) {
       this.cart.push(id); // push id of product into cart
+    },
+    removeProductFromCart(id){
+      console.log('product to be removed:', id);
+      console.log('this.cart before:', this.cart);
+
+      this.cart = this.cart.filter(item => item !== id);
+      console.log('this.cart after:', this.cart);
     }
   }
 })
