@@ -48,21 +48,23 @@ Vue.component('product', {
              @mouseover="updateProduct(index)"
              >
         </div>
+        <div>
+          <button v-on:click="addToCart"
+            :disabled="!inStock"
+            :class="{ disabledButton: !inStock }"
+            >
+            Add to cart
+          </button>
 
-        <button v-on:click="addToCart"
-          :disabled="!inStock"
-          :class="{ disabledButton: !inStock }"
-          >
-          Add to cart
-        </button>
-
-        <button @click="removeFromCart">
-          Remove from cart
-        </button>
-
-        <productDetails :detailslalala=" productDetails "></productDetails>
-
+          <button @click="removeFromCart">
+            Remove from cart
+          </button>
+        </div>
       </div>
+
+      <product-review></product-review>
+
+      <productDetails :detailslalala=" productDetails "></productDetails>
 
     </div>
   `,
@@ -131,7 +133,47 @@ Vue.component('product', {
   }
 })
 
-// 11, Forms
+// 11, Forms: v-model, TWO-WAY binding: template <=> data
+// v-bind, ONE-WAY binding: data => template
+Vue.component('product-review', {
+  template: `
+    <form class="review-form" @submit.prevent="onSubmit">
+      <p>
+        <label for="name">Name:</label>
+        <input id="name" v-model="name" placeholder="name">
+      </p>
+
+      <p>
+        <label for="review">Review:</label>
+        <textarea id="review" v-model="review"></textarea>
+      </p>
+
+      <p>
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+      </p>
+
+      <p>
+        <input type="submit" value="Submit">
+      </p>
+
+    </form>
+
+  `,  // v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number
+  data() {
+    return {
+      name: null,
+      review: null,
+      rating: null,
+    }
+  }
+})
 
 // Challenge:
 // level 3
