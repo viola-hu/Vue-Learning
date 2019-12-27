@@ -11,8 +11,14 @@
   <div class="nav-bar"></div>
 
   <div id="app">
+
+    <div class="cart">
+      <p>Cart({{ cart.length }})</p>
+    </div>
+
     <product :whatever-name="premium"
-             :product-details="productDetails">
+             :product-details="productDetails"
+             @add-to-cart="updateCart">  <!-- add an event listerner for emission from child component in parent HTML => 'add-to-cart' is the event name this component is listening for ( @ === v-on: ), once the Add to Cart button is clicked in child product component, child emits a signal of add-to-cart event happening, then on receiving the signal from child, it triggers the 'updateCart' method predefined in parent methods-->
     </product>
              <!-- add the prop that you want to pass down as a custom attribute, *** using kebab case!!! NOT camel case!!! -->
   </div>

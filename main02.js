@@ -56,10 +56,6 @@ Vue.component('product', {
         Add to cart
         </button>
 
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
-
         <productDetails :detailslalala=" productDetails "></productDetails>
 
       </div>
@@ -88,13 +84,16 @@ Vue.component('product', {
           variantQuantity: 0
         }
       ],
-      cart: 0,
       onSale: true
     }
   },
   methods: {
     addToCart() {
-        this.cart += 1
+        // this.cart += 1 // as cart data is moved to parent component, it no longer works
+        // instead, we need to let the parent know that the button is clicked by emitting an event!
+        // *** this.$emit(' name-of-the-event ', other arguments)
+        this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+        // bubble up data of product ID as the second argument to parent component
     },
     updateProduct(index) {
         this.selectedVariant = index
@@ -153,6 +152,7 @@ Vue.component('productDetails', {
 var app = new Vue({
   el: '#app',
   data: {
+    cart: [], // in real app, we want to know exactly what's added to the cart, make it [] so we can push items into it.
     premium: true,  // pass this data into <product> component as a prop, from parent to child element
                     // *** if premium: 'hi', we received a warning in console as below
                     // [Vue warn]: Invalid prop: type check failed for prop "whateverName". Expected Boolean, got String.
@@ -167,6 +167,11 @@ var app = new Vue({
         sizes: ['S', 'XL'],
         inventory: 800,
       }
+    }
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id); // push id of product into cart
     }
   }
 })
