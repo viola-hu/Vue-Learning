@@ -230,11 +230,12 @@ Vue.component('product-review', {
         // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
         // => after retrieving the review info from data and saving into a new variable object,
         // *** reset data (saved in memory) to null for the purpose of the next round of submit!
+        // 如果不 reset，而且不 default refresh page 的话，前一个 form 的内容在 submit 后仍然留存在 form 上
         this.name = null;
         this.review = null;
         this.rating = null;
         this.recommend = "Yes";
-        
+
       } else {
 
         if(!this.name)       this.errors.push("Name required.")
