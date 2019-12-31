@@ -183,6 +183,8 @@ Vue.component('product-review', {
   `,
   // *** v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number, instead of a string by default of any user input!
   // *** @submit.prevent, '.prevent' is an event modifier that will prevent the default behavior of browser from refreshing page when submiting a form!
+  // *** for reviews, you can define some required input from users, using 'required' attribute - HTML5. If the required field is not filled in when submitted, it will show up error message automatically. 'Please fill out this field.' - this is a browser feature.
+  // Alternatively, you can write your own custom form validation.
   data() {
     return {
       name: null,
@@ -269,3 +271,6 @@ var app = new Vue({
 })
 
 // 10, communicating events
+
+
+// The HTML <b> tag is used to create a 'b' element, which represents bold text in an HTML document. The <b> tag should be used to markup text as bold without conveying any extra importance, for example in article abstracts, where the beginning of an article is set in bold text.
