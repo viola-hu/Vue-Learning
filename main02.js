@@ -209,12 +209,13 @@ Vue.component('product-review', {
       name: null, // 2-way bind data to inputs using v-model
       review: null,
       rating: null,
-      recommend: "Yes",
+      recommend: "Yes", // set default value as 'Yes'
       errors: [],
     }
   },
   methods: {
     onSubmit() {
+      this.errors = []; // reset the last round errors array if any
 
       if(this.name && this.review && this.rating && (this.recommend === "Yes" || this.recommend === "No")) {
         let productReview = {
@@ -233,10 +234,8 @@ Vue.component('product-review', {
         this.review = null;
         this.rating = null;
         this.recommend = "Yes";
-        this.errors = []; // reset the last round errors array if any
+        
       } else {
-        // reset the last round errors array
-        this.errors = [];
 
         if(!this.name)       this.errors.push("Name required.")
         if(!this.review)     this.errors.push("Review required.")
