@@ -62,6 +62,17 @@ Vue.component('product', {
         </div>
       </div>
 
+      <div>
+        <h2>Reviews</h2>
+        <p v-if="!reviews.length">There are no reviews yet.</p
+        <ul>
+          <li v-for="review in reviews">
+            <span> Rating: {{ review.rating }}, by {{ review.name }}</span>
+            <p> "{{ review.review }}"</p>
+          </li>
+        </ul>
+      </div>
+
       <product-review @review-submitted="addReview"></product-review>
 
       <productDetails :detailslalala=" productDetails "></productDetails>
