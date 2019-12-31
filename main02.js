@@ -133,8 +133,8 @@ Vue.component('product', {
   }
 })
 
-// 11, Forms: v-model, TWO-WAY binding: template <=> data
-// v-bind, ONE-WAY binding: data => template
+// 11, Forms: v-model, TWO-WAY data binding: template <=> data
+// v-bind, ONE-WAY data binding: data => template
 Vue.component('product-review', {
   template: `
     <form class="review-form" @submit.prevent="onSubmit">
@@ -166,14 +166,14 @@ Vue.component('product-review', {
     </form>
 
   `,
-  // v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number, instead of a string by default of user inputs!
-  // @submit.prevent, '.prevent' is another modifier that will prevent the default behavior of browser from refreshing page when submiting a form!
+  // *** v-model.number, '.number' is a modifier that will make sure to typecast (转型) this value as a number, instead of a string by default of any user input!
+  // *** @submit.prevent, '.prevent' is another modifier that will prevent the default behavior of browser from refreshing page when submiting a form!
   data() {
     return {
       name: null,
       review: null,
       rating: null,
-    }
+    } // 2-way bind data to inputs using v-model
   },
   methods: {
     onSubmit() {
