@@ -62,7 +62,7 @@ Vue.component('product', {
         </div>
       </div>
 
-      <product-review></product-review>
+      <product-review @review-submitted="addReview"></product-review>
 
       <productDetails :detailslalala=" productDetails "></productDetails>
 
@@ -90,7 +90,8 @@ Vue.component('product', {
           variantQuantity: 0
         }
       ],
-      onSale: true
+      onSale: true,
+      reviews: [],
     }
   },
   methods: {
@@ -104,8 +105,11 @@ Vue.component('product', {
     updateProduct(index) {
         this.selectedVariant = index
     },
-    removeFromCart(){
+    removeFromCart() {
         this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
+    },
+    addReview(productReview) {
+        this.reviews.push(productReview);
     }
   },
   computed: {
@@ -182,6 +186,9 @@ Vue.component('product-review', {
         review: this.review,
         rating: this.rating,
       }
+
+      this.$emit('review-submitted', productReview);
+
       // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
       // => after retrieving the review info from data and saving into a new variable object,
       // *** reset data (saved in memory) to null for the purpose of the next round of submit!
