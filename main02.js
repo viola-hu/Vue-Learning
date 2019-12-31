@@ -68,7 +68,8 @@ Vue.component('product', {
         <ul>
           <li v-for="review in reviews">
             <span> Rating: {{ review.rating }}, by {{ review.name }}</span>
-            <p> "{{ review.review }}"</p>
+            <p> Recommend this product? {{ review.recommend }} </p>
+            <p> Review: "{{ review.review }}"</p>
           </li>
         </ul>
       </div>
@@ -153,6 +154,14 @@ Vue.component('product', {
 Vue.component('product-review', {
   template: `
     <form class="review-form" @submit.prevent="onSubmit">
+
+      <div v-if="errors.length">
+        <b> Please correct below error(s):</b>
+        <ul>
+          <li v-for="error in errors"> {{ error }} </li>
+        </ul>
+      </div>
+
       <p>
         <label for="name">Name:</label>
         <input id="name" v-model="name" placeholder="name">
@@ -174,6 +183,16 @@ Vue.component('product-review', {
         </select>
       </p>
 
+      <p> Question: Would you recommend this product? </p>
+      <div>
+        <input type="radio" id="yes" value="Yes" v-model="recommend">
+        <label for="yes"> Yes </label>
+        <br>
+
+        <input type="radio" id="no" value="No" v-model="recommend">
+        <label for="no"> No </label>
+      </div>
+
       <p>
         <input type="submit" value="Submit">
       </p>
@@ -187,27 +206,43 @@ Vue.component('product-review', {
   // Alternatively, you can write your own custom form validation.
   data() {
     return {
-      name: null,
+      name: null, // 2-way bind data to inputs using v-model
       review: null,
       rating: null,
-    } // 2-way bind data to inputs using v-model
+      recommend: "Yes",
+      errors: [],
+    }
   },
   methods: {
     onSubmit() {
-      let productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
+
+      if(this.name && this.review && this.rating && (this.recommend === "Yes" || this.recommend === "No")) {
+        let productReview = {
+          name: this.name,
+          review: this.review,
+          rating: this.rating,
+          recommend: this.recommend,
+        }
+
+        this.$emit('review-submitted', productReview);
+
+        // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
+        // => after retrieving the review info from data and saving into a new variable object,
+        // *** reset data (saved in memory) to null for the purpose of the next round of submit!
+        this.name = null;
+        this.review = null;
+        this.rating = null;
+        this.recommend = "Yes";
+        this.errors = []; // reset the last round errors array if any
+      } else {
+        // reset the last round errors array
+        this.errors = [];
+
+        if(!this.name)       this.errors.push("Name required.")
+        if(!this.review)     this.errors.push("Review required.")
+        if(!this.rating)     this.errors.push("Rating required.")
+        if(this.recommend !== "Yes" && this.recommend !== "No")  this.errors.push("Answer required.")
       }
-
-      this.$emit('review-submitted', productReview);
-
-      // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
-      // => after retrieving the review info from data and saving into a new variable object,
-      // *** reset data (saved in memory) to null for the purpose of the next round of submit!
-      this.name = null;
-      this.review = null;
-      this.rating = null;
     }
   }
 })
