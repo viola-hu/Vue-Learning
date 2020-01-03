@@ -62,6 +62,8 @@ Vue.component('product', {
         </div>
       </div>
 
+      <product-tabs></product-tabs>
+
       <div>
         <h2>Reviews</h2>
         <p v-if="!reviews.length">There are no reviews yet.</p
@@ -247,6 +249,31 @@ Vue.component('product-review', {
   }
 })
 
+// 12, tabs
+Vue.component('product-tabs', {
+  template: `
+    <div>
+      <span class="tab"
+            :class="{ activeTab: selectedTab === tab }"
+            v-for="(tab, index) in tabs"
+            :key="index"
+            @click="selectedTab = tab">
+        {{tab}}
+      </span>
+    </div>
+  `,
+  // *** event handler, v-on:event = an expression directly / or a method within " "
+  // e.g. @click = "selectedTab = tab", on click, assign tab's value to the data selectedTab
+  // *** bind an activeTab class to the currently selectedTab span, whenever 'selectedTab === tab'
+  data() {
+    return {
+      tabs: [ 'Reviews', 'Make a Review' ],
+      selectedTab: 'Reviews', // initialize it as Reviews
+    }
+  }
+})
+
+
 // Challenge:
 // level 3
 Vue.component('productDetails', {
@@ -309,6 +336,3 @@ var app = new Vue({
 
 
 // The HTML <b> tag is used to create a 'b' element, which represents bold text in an HTML document. The <b> tag should be used to markup text as bold without conveying any extra importance, for example in article abstracts, where the beginning of an article is set in bold text.
-
-
-// 12, tabs
