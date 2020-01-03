@@ -1,8 +1,8 @@
-// *** In order to communicate from grandchild component UP to grandparent component, we create a global channel, through which we can send informtion. 
-// We call this channel eventBut, and it will be a new Vue instance.
-// We use this eventBus to transport passengers throughout our application.
+// *** In order to communicate from grandchild component UP to grandparent component, we implement a global channel, through which we can send information.
+// We call this channel here eventBus, and it will be a new Vue instance.
+// We use this eventBus to transport passengers/data throughout our application.
 const eventBus = new Vue();
-// !!! but as the app grows, you want to implement Vue's own state management solution Vuex
+// !!! but as the app grows, you want to implement Vue's own state management solution - Vuex
 
 
 // level 2
