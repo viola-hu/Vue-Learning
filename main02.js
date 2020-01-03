@@ -309,3 +309,6 @@ var app = new Vue({
 
 
 // The HTML <b> tag is used to create a 'b' element, which represents bold text in an HTML document. The <b> tag should be used to markup text as bold without conveying any extra importance, for example in article abstracts, where the beginning of an article is set in bold text.
+
+
+// 12, tabs
