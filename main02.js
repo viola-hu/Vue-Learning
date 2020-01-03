@@ -62,21 +62,7 @@ Vue.component('product', {
         </div>
       </div>
 
-      <product-tabs></product-tabs>
-
-      <div>
-        <h2>Reviews</h2>
-        <p v-if="!reviews.length">There are no reviews yet.</p
-        <ul>
-          <li v-for="review in reviews">
-            <span> Rating: {{ review.rating }}, by {{ review.name }}</span>
-            <p> Recommend this product? {{ review.recommend }} </p>
-            <p> Review: "{{ review.review }}"</p>
-          </li>
-        </ul>
-      </div>
-
-      <product-review @review-submitted="addReview"></product-review>
+      <product-tabs :reviews="reviews"></product-tabs>
 
       <productDetails :detailslalala=" productDetails "></productDetails>
 
@@ -251,6 +237,12 @@ Vue.component('product-review', {
 
 // 12, tabs
 Vue.component('product-tabs', {
+  props: {
+    reviews: {
+      type: Array,
+      required: true,
+    }
+  }, // need to tell the child component "product-tabs" that it's going to receive props from parent
   template: `
     <div>
       <span class="tab"
@@ -260,6 +252,23 @@ Vue.component('product-tabs', {
             @click="selectedTab = tab">
         {{tab}}
       </span>
+
+      <div>
+        <h2>Reviews</h2>
+        <p v-if="!reviews.length">There are no reviews yet.</p
+        <ul v-else>
+          <li v-for="(review, index) in reviews"
+              :key="index">
+            <p> Rating: {{ review.rating }}, by {{ review.name }}</p>
+            <p> Recommend this product? {{ review.recommend }} </p>
+            <p> Review: "{{ review.review }}"</p>
+          </li>
+        </ul>
+      </div>
+
+      <product-review @review-submitted="addReview"></product-review>
+
+
     </div>
   `,
   // *** event handler, v-on:event = an expression directly / or a method within " "
