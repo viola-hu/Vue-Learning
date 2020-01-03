@@ -1,3 +1,10 @@
+// *** In order to communicate between grandparent component and grandchild component, we create a global channel, through which we can send informtion. @review-submitted="addReview"
+// We call this channel eventBut, and it will be a new Vue instance.
+// We use this eventBus to transport passengers throughout our application.
+const eventBus = new Vue();
+// !!! but as the app grows, you want to implement Vue's own state management solution Vuex
+
+
 // level 2
 Vue.component('product', {
   // in order to receive props, components need to explicitly declare the props that it expects to receive, using the 'props' option
@@ -108,9 +115,6 @@ Vue.component('product', {
     removeFromCart() {
         this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
     },
-    addReview(productReview) {
-        this.reviews.push(productReview);
-    }
   },
   computed: {
     title() {
@@ -134,7 +138,13 @@ Vue.component('product', {
       }
       return 2.99;
     },
-  }
+  },
+  mounted() {
+    eventBus.$on('review-submitted', productReview => {
+      this.reviews.push(productReview);
+    })
+  } // mounted is one of the lifecycle hooks. It's a place to put code that you want to run as soon as the component is mounted to the DOM.
+  // $on similar to v-on: , for event handler, listening for events
 })
 
 // 11, Forms: v-model, TWO-WAY data binding: template <=> data
@@ -213,7 +223,9 @@ Vue.component('product-review', {
           recommend: this.recommend,
         }
 
-        this.$emit('review-submitted', productReview);
+        eventBus.$emit('review-submitted', productReview);
+        // we use the eventBus to transport information throughout our app.
+        // Here we use the eventBus to emit review-submitted, along with its payload(负载), productReview.
 
         // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
         // => after retrieving the review info from data and saving into a new variable object,
@@ -253,9 +265,8 @@ Vue.component('product-tabs', {
         {{tab}}
       </span>
 
-      <div>
-        <h2>Reviews</h2>
-        <p v-if="!reviews.length">There are no reviews yet.</p
+      <div v-show="selectedTab === 'Reviews'">
+        <p v-if="!reviews.length">There are no reviews yet.</p>
         <ul v-else>
           <li v-for="(review, index) in reviews"
               :key="index">
@@ -266,9 +277,7 @@ Vue.component('product-tabs', {
         </ul>
       </div>
 
-      <product-review @review-submitted="addReview"></product-review>
-
-
+      <product-review v-show="selectedTab === 'Make a Review'"></product-review>
     </div>
   `,
   // *** event handler, v-on:event = an expression directly / or a method within " "
@@ -279,7 +288,7 @@ Vue.component('product-tabs', {
       tabs: [ 'Reviews', 'Make a Review' ],
       selectedTab: 'Reviews', // initialize it as Reviews
     }
-  }
+  },
 })
 
 
