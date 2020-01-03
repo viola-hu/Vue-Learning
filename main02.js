@@ -1,4 +1,4 @@
-// *** In order to communicate between grandparent component and grandchild component, we create a global channel, through which we can send informtion. @review-submitted="addReview"
+// *** In order to communicate from grandchild component UP to grandparent component, we create a global channel, through which we can send informtion. // @review-submitted="addReview"
 // We call this channel eventBut, and it will be a new Vue instance.
 // We use this eventBus to transport passengers throughout our application.
 const eventBus = new Vue();
