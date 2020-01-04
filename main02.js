@@ -225,7 +225,7 @@ Vue.component('product-review', {
 
         eventBus.$emit('review-submitted', productReview);
         // we use the eventBus to transport information throughout our app.
-        // Here we use the eventBus to emit review-submitted, along with its payload(负载), productReview.
+        // Here we use the eventBus to emit review-submitted custom event, along with its payload(负载), productReview.
 
         // whenever we submit this form, 尽管页面 refresh，但还会存留着上一个提交 form 的 data。
         // => after retrieving the review info from data and saving into a new variable object,
