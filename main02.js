@@ -69,9 +69,22 @@ Vue.component('product', {
         </div>
       </div>
 
+      <div>
+        <h1>TEST 1</h1>
+        <input type="text" v-on:input="changeTitle" placeholder="placeholder">
+        <p>{{ testTitle1 }}</p>
+      </div>
+
+      <div>
+        <h1>TEST 2</h1>
+        <input type="text" v-model="testTitle2" placeholder="placeholder">
+        <p>{{ testTitle2 }}</p>
+      </div>
+
       <product-tabs :reviews="reviews"></product-tabs>
 
       <productDetails :detailslalala=" productDetails "></productDetails>
+
 
     </div>
   `,
@@ -99,6 +112,8 @@ Vue.component('product', {
       ],
       onSale: true,
       reviews: [],
+      testTitle1: 'Hello World!',
+      testTitle2: 'Hello World!',
     }
   },
   methods: {
@@ -115,6 +130,11 @@ Vue.component('product', {
     removeFromCart() {
         this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
     },
+    changeTitle(event) {
+      console.log('event:', event);
+      console.log('event.target.value:', event.target.value);
+      this.testTitle1 = event.target.value;
+    }
   },
   computed: {
     title() {
