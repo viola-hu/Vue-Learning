@@ -47,6 +47,7 @@ const app = new Vue({
     styleObject2: {
       background: 'yellow'
     },
+    title: "Hello World!",
   },
   // 8, computed data
   // Just like data/methods property of our Vue instance, we can add an object of 'computed' properties!
@@ -105,6 +106,10 @@ const app = new Vue({
       if(this.cart < 0) {
         this.cart = 0;
       }
+    },
+    sayHello() {
+      this.title = 'Hello';
+      return this.title;
     }
   }
 

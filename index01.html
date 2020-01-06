@@ -13,6 +13,14 @@
 
   <div id="app">
     <div class="product">
+      <!-- 8, v-once : all content inside this element (including any sub-level elements inside it) will only be rendered once! it won't be updated if its value changes later on! -->
+      <h1 v-once> {{ title }} </h1>
+
+      <div v-once>
+        <h2> {{ title }} </h2>
+      </div>
+
+      <p> {{ sayHello() }} </p>
 
       <div class="product-image">
         <!-- 1, v-bind directive : create a bond between the data and the attribute that we want the data to be bound to, NO NEED {{}} => expression in the quotes "" !!!-->
@@ -165,7 +173,7 @@
 
   <!-- install Vue -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="main.js"></script>
+  <script src="main01.js"></script>
 
 </body>
 </html>
@@ -173,7 +181,7 @@
 
 <!-- NOTE:
 1, v-bind
-: Dynamically binds an attribute to an expression
+: Dynamically binds an attribute to the data of the Vue instance
 e.g.
 <img v-bind:src="expression">
 => bind image attribute: src, with expression: image in the quotes ""!!!
@@ -199,4 +207,11 @@ visibility:hidden => means that unlike display:none, the tag is not visible, but
 3, <button disable="true/false">
 : disabled -> this boolean attribute prevents the user from interacting with the button.
 -> only make the button not do anything (disabled) when it's clicked, but it doesn't change any appearance.
+
+4, ######## extra notes from new course #######
+1, {{ }} - 'interpolation'
+2, no curly brakets in any html element attribute!!!
+=> use v-bind on the attribute, and write (data/methods/etc.) property name directly within " ", not "{{ }}" - WRONG!
+e.g. <a :href="sockLink">here</a>!
+
 -->
